@@ -5,10 +5,10 @@ import 'data_model.dart';
 class Quotes extends ChangeNotifier {
   QuotesModel? quote;
 
-  void getquotes() async {
-    quote = await client.getnewquotes();
-    notifyListeners();
-  }
+  // void getquotes() async {
+  //   quote = await client.getnewquotes();
+  //   notifyListeners();
+  // }
 
   void postquotes() async {}
 

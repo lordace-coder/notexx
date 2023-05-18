@@ -9,7 +9,6 @@ void main() {
     ChangeNotifierProvider(
       create: (_) {
         Quotes quotes = Quotes();
-        quotes.getquotes();
         return quotes;
       },
     )

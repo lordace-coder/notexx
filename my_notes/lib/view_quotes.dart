@@ -11,10 +11,7 @@ class QuotesPage extends StatelessWidget {
     Quotes myquote = Provider.of<Quotes>(context);
     List<dynamic>? myquoteslist = [];
     myquote.getquoteslist();
-    myquoteslist = myquote.quote!.allQuotes;
-
-    // Use a null-aware operator to access `myquote.quote!.allQuotes`
-    // Use the correct data type of the list
+    myquoteslist = myquote.quote?.allQuotes;
 
     return SafeArea(
       child: Container(
@@ -31,15 +28,15 @@ class QuotesPage extends StatelessWidget {
                 itemBuilder: (context, int i) {
                   return GestureDetector(
                     onTap: () {
-                      if (myquoteslist![i] != null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => QuoteDetailPage(
-                                quotes_detail: myquoteslist![i]),
-                          ),
-                        );
-                      }
+                      // if (myquoteslist![i] != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              QuoteDetailPage(quotes_detail: myquoteslist![i]),
+                        ),
+                      );
+                      // }
                     },
                     child: ListTile(
                       leading: const CircleAvatar(

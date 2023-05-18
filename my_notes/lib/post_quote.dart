@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'client.dart';
 
 class Postpage extends StatefulWidget {
   const Postpage({super.key});
@@ -9,12 +10,19 @@ class Postpage extends StatefulWidget {
 
 class _PostpageState extends State<Postpage> {
   final quoteTextController = TextEditingController();
-
   final nameTextController = TextEditingController();
+  Map postdata = {};
 
   void clearAll() {
     quoteTextController.clear();
     nameTextController.clear();
+  }
+
+  void submitData() {
+    postdata["quote"] = quoteTextController.text;
+    postdata["by"] = nameTextController.text;
+    postnewquote(postdata);
+    clearAll();
   }
 
   @override
@@ -52,7 +60,8 @@ class _PostpageState extends State<Postpage> {
                   backgroundColor: MaterialStatePropertyAll(Colors.purple)),
               onPressed: () {
                 setState(() {
-                  clearAll();
+                  submitData();
+                  print(postdata);
                 });
               },
               child: const Text(
