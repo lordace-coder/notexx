@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/flutter_provider.dart';
-import '../client.dart';
-import 'dart:io';
+import '../client.dart' as client;
 import 'data_model.dart';
 
 class Quotes extends ChangeNotifier {
   QuotesModel? quote;
 
   void getquotes() async {
-    quote = await getquotes();
+    quote = await client.getnewquotes();
+    notifyListeners();
+  }
+
+  void postquotes() async {}
+
+  void getquoteslist() async {
+    quote = await client.getquoteslist();
+    notifyListeners();
   }
 }

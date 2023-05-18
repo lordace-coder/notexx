@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:my_notes/view_quotes.dart';
 import 'post_quote.dart';
-import 'package:flutter_provider/flutter_provider.dart';
+import 'package:provider/provider.dart';
+import 'models/quotes.dart';
 
 void main() {
-  runApp((const MainApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (_) {
+        Quotes quotes = Quotes();
+        quotes.getquotes();
+        return quotes;
+      },
+    )
+  ], child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -28,6 +37,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+
+  // ! page routes
+
+  final _pages = <Widget>[
+    const QuotesPage(),
+    const Postpage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,8 +63,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-final _pages = <Widget>[
-  const QuotesPage(),
-  const Postpage(),
-];

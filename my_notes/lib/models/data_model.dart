@@ -1,8 +1,14 @@
 class QuotesModel {
   final Map? quote;
-  QuotesModel({required this.quote});
+  final List? allQuotes;
+  QuotesModel({required this.quote, required this.allQuotes});
 
   factory QuotesModel.fromJson(Map data) {
-    return QuotesModel(quote: data);
+    return QuotesModel(quote: data, allQuotes: []);
+  }
+
+  factory QuotesModel.fromList(List data) {
+    // print(data);
+    return QuotesModel(quote: {}, allQuotes: data);
   }
 }
