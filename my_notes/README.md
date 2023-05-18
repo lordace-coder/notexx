@@ -1,3 +1,3 @@
 # my_notes
 
-A new Flutter project.
+This flutter project pulls and posts data to a REST API on my local host 
