@@ -5,14 +5,8 @@ import 'package:provider/provider.dart';
 import 'models/quotes.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (_) {
-        Quotes quotes = Quotes();
-        return quotes;
-      },
-    )
-  ], child: const MainApp()));
+  runApp(
+      ChangeNotifierProvider(create: (_) => Quotes(), child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -20,8 +14,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      theme: ThemeData(primaryColor: Colors.purple),
+      home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -48,6 +43,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        fixedColor: Theme.of(context).primaryColor,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
           BottomNavigationBarItem(icon: Icon(Icons.send), label: 'post quote')

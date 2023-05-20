@@ -22,7 +22,7 @@ import 'models/data_model.dart';
 //   }
 //   return instance;
 // }
-
+bool failed = false;
 Future<QuotesModel?> getquoteslist() async {
   http.Response response;
   QuotesModel? instance;
@@ -32,11 +32,14 @@ Future<QuotesModel?> getquoteslist() async {
       // return an instance of the data
       var newdata = jsonDecode(response.body);
       instance = QuotesModel.fromList(newdata);
+      failed = true;
       return instance;
     }
   } catch (e) {
-    print(e.toString());
+    debugPrint(e.toString());
+    failed = true;
   }
+
   return instance;
 }
 
@@ -47,13 +50,24 @@ Future<http.Response?> postnewquote(Map data) async {
     response = await http.post(Uri.parse('http://10.0.2.2:8000/quotes_create'),
         headers: {HttpHeaders.contentTypeHeader: 'application/json'},
         body: jsonEncode(data));
-    if (response.statusCode == 201) {
-      debugPrint("Succesfully posted");
-    }
   } catch (e) {
     debugPrint(e.toString());
   }
-  print(response);
-  print(response!.body);
+
+  return response;
+}
+
+Future<http.Response?> deletequote(int pk) async {
+  http.Response? response;
+
+  try {
+    response = await http.delete(
+      Uri.parse('http://10.0.2.2:8000/delete/$pk'),
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+  } catch (e) {
+    debugPrint(e.toString());
+  }
+
   return response;
 }
